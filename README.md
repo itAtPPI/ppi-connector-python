@@ -1,2 +1,2 @@
 # ppi-connector-python
-a simple connector to PPI Public API
+simple examples to connect and use PPI Public API
