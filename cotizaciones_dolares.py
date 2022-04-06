@@ -21,11 +21,16 @@ ppi = PPI(sandbox=False)
 cotizaciones = {
     "MEP-AL30": 0,
     "CCL-AL30": 0,
+    "MEP-AL35": 0,
+    "CCL-AL35": 0,
     "MEP-GD30": 0,
     "CCL-GD30": 0,
     "AL30": 0,
     "AL30C": 0,
     "AL30D": 0,
+    "AL35": 0,
+    "AL35C": 0,
+    "AL35D": 0,
     "GD30": 0,
     "GD30C": 0,
     "GD30D": 0
@@ -35,12 +40,16 @@ cotizaciones = {
 def calcular_y_mostrar():
     cotizaciones["MEP-AL30"] = cotizaciones["AL30"] / cotizaciones["AL30D"]
     cotizaciones["CCL-AL30"] = cotizaciones["AL30"] / cotizaciones["AL30C"]
+    cotizaciones["MEP-AL35"] = cotizaciones["AL35"] / cotizaciones["AL35D"]
+    cotizaciones["CCL-AL35"] = cotizaciones["AL35"] / cotizaciones["AL35C"]
     cotizaciones["MEP-GD30"] = cotizaciones["GD30"] / cotizaciones["GD30D"]
     cotizaciones["CCL-GD30"] = cotizaciones["GD30"] / cotizaciones["GD30C"]
 
     print("\nCotizacion a las %s" % datetime.now())
     print("Dolar MEP calculado con AL30 %.3f" % cotizaciones["MEP-AL30"])
     print("Dolar CCL calculado con AL30 %.3f" % cotizaciones["CCL-AL30"])
+    print("Dolar MEP calculado con AL35 %.3f" % cotizaciones["MEP-AL35"])
+    print("Dolar CCL calculado con AL35 %.3f" % cotizaciones["CCL-AL35"])
     print("Dolar MEP calculado con GD30 %.3f" % cotizaciones["MEP-GD30"])
     print("Dolar CCL calculado con GD30 %.3f" % cotizaciones["CCL-GD30"])
 
@@ -61,6 +70,13 @@ def main():
                 cotizaciones["AL30C"] = msg['price']
                 msg = ppi.marketdata.current(SearchMarketData("AL30D", "BONOS", "INMEDIATA"))
                 cotizaciones["AL30D"] = msg['price']
+                
+                msg = ppi.marketdata.current(SearchMarketData("AL35", "BONOS", "INMEDIATA"))
+                cotizaciones["AL35"] = msg['price']
+                msg = ppi.marketdata.current(SearchMarketData("AL35C", "BONOS", "INMEDIATA"))
+                cotizaciones["AL35C"] = msg['price']
+                msg = ppi.marketdata.current(SearchMarketData("AL35D", "BONOS", "INMEDIATA"))
+                cotizaciones["AL35D"] = msg['price']
 
                 msg = ppi.marketdata.current(SearchMarketData("GD30", "BONOS", "INMEDIATA"))
                 cotizaciones["GD30"] = msg['price']
@@ -75,6 +91,9 @@ def main():
                 ppi.realtime.subscribe_to_element(Instrument("AL30", "BONOS", "INMEDIATA"))
                 ppi.realtime.subscribe_to_element(Instrument("AL30C", "BONOS", "INMEDIATA"))
                 ppi.realtime.subscribe_to_element(Instrument("AL30D", "BONOS", "INMEDIATA"))
+                ppi.realtime.subscribe_to_element(Instrument("AL35", "BONOS", "INMEDIATA"))
+                ppi.realtime.subscribe_to_element(Instrument("AL35C", "BONOS", "INMEDIATA"))
+                ppi.realtime.subscribe_to_element(Instrument("AL35D", "BONOS", "INMEDIATA"))
                 ppi.realtime.subscribe_to_element(Instrument("GD30", "BONOS", "INMEDIATA"))
                 ppi.realtime.subscribe_to_element(Instrument("GD30C", "BONOS", "INMEDIATA"))
                 ppi.realtime.subscribe_to_element(Instrument("GD30D", "BONOS", "INMEDIATA"))
