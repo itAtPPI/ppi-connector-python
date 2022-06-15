@@ -1,2 +1,5 @@
 # ppi-connector-python
-simple examples to connect and use PPI Public API
+Simple examples to connect and use PPI Public API
+
+For access to the official documentation:
+https://itatppi.github.io/ppi-official-api-docs/api/documentacionPython/
