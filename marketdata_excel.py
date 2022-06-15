@@ -1,19 +1,23 @@
 # Codigo propio de ppi, siempre obligatorio
+from ppi_client.api.constants import ACCOUNTDATA_TYPE_ACCOUNT_NOTIFICATION, ACCOUNTDATA_TYPE_PUSH_NOTIFICATION, \
+    ACCOUNTDATA_TYPE_ORDER_NOTIFICATION
 from ppi_client.models.account_movements import AccountMovements
+from ppi_client.models.bank_account_request import BankAccountRequest
+from ppi_client.models.foreign_bank_account_request import ForeignBankAccountRequest, ForeignBankAccountRequestDTO
+from ppi_client.models.cancel_bank_account_request import CancelBankAccountRequest
+from ppi_client.models.order import Order
 from ppi_client.ppi import PPI
-from ppi_client.models.orders_filter import OrdersFilter
 from ppi_client.models.order_budget import OrderBudget
 from ppi_client.models.order_confirm import OrderConfirm
 from ppi_client.models.disclaimer import Disclaimer
-from ppi_client.models.search_instrument import SearchInstrument
-from ppi_client.models.search_marketdata import SearchMarketData
-from ppi_client.models.search_datemarketdata import SearchDateMarketData
-from ppi_client.models.order import Order
+from ppi_client.models.investing_profile import InvestingProfile
+from ppi_client.models.investing_profile_answer import InvestingProfileAnswer
 from ppi_client.models.instrument import Instrument
 from datetime import datetime, timedelta
 import asyncio
 import json
 import traceback
+import os
 from openpyxl import Workbook
 
 # Change sandbox variable to False to connect to production environment
@@ -27,8 +31,7 @@ def main():
 
         # Obtengo las cotizaciones historicas
         print("\nSearching MarketData")
-        market_data = ppi.marketdata.search(SearchDateMarketData("GGAL", "Acciones", "A-48HS",
-                                                                 "2021-01-01", "2021-12-31"))
+        market_data = ppi.marketdata.search("GGAL", "Acciones", "A-48HS", datetime(2021, 1, 1), datetime(2021, 12, 31))
 
         # Creo el excel
         workbook = Workbook()
@@ -65,4 +68,3 @@ def main():
 
 if __name__ == '__main__':
     main()
-
