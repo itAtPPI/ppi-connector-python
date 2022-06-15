@@ -60,8 +60,7 @@ def calcular_y_mostrar():
 
 def main():
     try:
-        # ppi.account.login('<user key>', '<user secret>')
-        ppi.account.login('MarceApi', 'Olleros.3918')
+        ppi.account.login('<user key>', '<user secret>')
 
         def onconnect_marketdata():
             try:
