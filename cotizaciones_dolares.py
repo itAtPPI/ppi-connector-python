@@ -1,18 +1,22 @@
+from ppi_client.api.constants import ACCOUNTDATA_TYPE_ACCOUNT_NOTIFICATION, ACCOUNTDATA_TYPE_PUSH_NOTIFICATION, \
+    ACCOUNTDATA_TYPE_ORDER_NOTIFICATION
 from ppi_client.models.account_movements import AccountMovements
+from ppi_client.models.bank_account_request import BankAccountRequest
+from ppi_client.models.foreign_bank_account_request import ForeignBankAccountRequest, ForeignBankAccountRequestDTO
+from ppi_client.models.cancel_bank_account_request import CancelBankAccountRequest
+from ppi_client.models.order import Order
 from ppi_client.ppi import PPI
-from ppi_client.models.orders_filter import OrdersFilter
 from ppi_client.models.order_budget import OrderBudget
 from ppi_client.models.order_confirm import OrderConfirm
 from ppi_client.models.disclaimer import Disclaimer
-from ppi_client.models.search_instrument import SearchInstrument
-from ppi_client.models.search_marketdata import SearchMarketData
-from ppi_client.models.search_datemarketdata import SearchDateMarketData
-from ppi_client.models.order import Order
+from ppi_client.models.investing_profile import InvestingProfile
+from ppi_client.models.investing_profile_answer import InvestingProfileAnswer
 from ppi_client.models.instrument import Instrument
 from datetime import datetime, timedelta
 import asyncio
 import json
 import traceback
+import os
 
 # Change sandbox variable to False to connect to production environment
 ppi = PPI(sandbox=False)
@@ -56,7 +60,8 @@ def calcular_y_mostrar():
 
 def main():
     try:
-        ppi.account.login('<user key>', '<user secret>')
+        # ppi.account.login('<user key>', '<user secret>')
+        ppi.account.login('MarceApi', 'Olleros.3918')
 
         def onconnect_marketdata():
             try:
@@ -64,25 +69,25 @@ def main():
 
                 # Obtengo las ultimas cotizaciones de cada instrumento
                 print("\nSearching Current MarketData")
-                msg = ppi.marketdata.current(SearchMarketData("AL30", "BONOS", "INMEDIATA"))
+                msg = ppi.marketdata.current("AL30", "BONOS", "INMEDIATA")
                 cotizaciones["AL30"] = msg['price']
-                msg = ppi.marketdata.current(SearchMarketData("AL30C", "BONOS", "INMEDIATA"))
+                msg = ppi.marketdata.current("AL30C", "BONOS", "INMEDIATA")
                 cotizaciones["AL30C"] = msg['price']
-                msg = ppi.marketdata.current(SearchMarketData("AL30D", "BONOS", "INMEDIATA"))
+                msg = ppi.marketdata.current("AL30D", "BONOS", "INMEDIATA")
                 cotizaciones["AL30D"] = msg['price']
                 
-                msg = ppi.marketdata.current(SearchMarketData("AL35", "BONOS", "INMEDIATA"))
+                msg = ppi.marketdata.current("AL35", "BONOS", "INMEDIATA")
                 cotizaciones["AL35"] = msg['price']
-                msg = ppi.marketdata.current(SearchMarketData("AL35C", "BONOS", "INMEDIATA"))
+                msg = ppi.marketdata.current("AL35C", "BONOS", "INMEDIATA")
                 cotizaciones["AL35C"] = msg['price']
-                msg = ppi.marketdata.current(SearchMarketData("AL35D", "BONOS", "INMEDIATA"))
+                msg = ppi.marketdata.current("AL35D", "BONOS", "INMEDIATA")
                 cotizaciones["AL35D"] = msg['price']
 
-                msg = ppi.marketdata.current(SearchMarketData("GD30", "BONOS", "INMEDIATA"))
+                msg = ppi.marketdata.current("GD30", "BONOS", "INMEDIATA")
                 cotizaciones["GD30"] = msg['price']
-                msg = ppi.marketdata.current(SearchMarketData("GD30C", "BONOS", "INMEDIATA"))
+                msg = ppi.marketdata.current("GD30C", "BONOS", "INMEDIATA")
                 cotizaciones["GD30C"] = msg['price']
-                msg = ppi.marketdata.current(SearchMarketData("GD30D", "BONOS", "INMEDIATA"))
+                msg = ppi.marketdata.current("GD30D", "BONOS", "INMEDIATA")
                 cotizaciones["GD30D"] = msg['price']
 
                 calcular_y_mostrar()
@@ -123,6 +128,9 @@ def main():
                 traceback.print_exc()
 
         ppi.realtime.connect_to_market_data(onconnect_marketdata, ondisconnect_marketdata, onmarketdata)
+        
+        # Starts connections to real time: for example to account or market data
+        ppi.realtime.start_connections()
 
     except Exception as message:
         print(message)
