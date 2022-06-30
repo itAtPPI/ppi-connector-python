@@ -8,6 +8,7 @@ from ppi_client.models.order import Order
 from ppi_client.ppi import PPI
 from ppi_client.models.order_budget import OrderBudget
 from ppi_client.models.order_confirm import OrderConfirm
+from ppi_client.models.transfer_budget import TransferBudget
 from ppi_client.models.disclaimer import Disclaimer
 from ppi_client.models.investing_profile import InvestingProfile
 from ppi_client.models.investing_profile_answer import InvestingProfileAnswer
@@ -232,6 +233,20 @@ def main():
         print("\nMass Cancel")
         cancels = ppi.orders.mass_cancel_order(account_number)
         print(cancels)
+        '''
+
+        ''' Uncomment to create a transfer
+        # Get transfer budget
+        print("\nGet budget for the transfer")
+        budget_transfer = ppi.orders.budget_transfer(TransferBudget(account_number, bank_account['taxHolderIdentifier'],
+                                                                    "ARS", bank_account['bankIdentifier'], None, 1000))
+        print(budget_transfer)
+
+        # Confirm transfer
+        print("\nConfirm transfer")
+        confirmation = ppi.orders.confirm_transfer(TransferBudget(account_number, bank_account['taxHolderIdentifier'],
+                                                                  "ARS", bank_account['bankIdentifier'], None, 1000))
+        print(confirmation)
         '''
 
         ''' Uncomment to get investing profile questions
