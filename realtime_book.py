@@ -25,7 +25,7 @@ ppi = PPI(sandbox=False)
 def main():
     try:
         # Change login credential to connect to the API
-        ppi.account.login('<user key>', '<user secret>')
+        ppi.account.login_api('<API Key>', '<API Secret>')
 
         # Realtime subscription to market data
         def onconnect_marketdata():
