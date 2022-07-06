@@ -27,7 +27,7 @@ ppi = PPI(sandbox=False)
 def main():
     try:
         # Change login credential to connect to the API
-        ppi.account.login('<user key>', '<user secret>')
+        ppi.account.login_api('<key publica>', '<key privada>')
 
         # Obtengo las cotizaciones historicas
         print("\nSearching MarketData")
