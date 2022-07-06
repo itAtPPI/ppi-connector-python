@@ -26,7 +26,7 @@ ppi = PPI(sandbox=False)
 def main():
     try:
         # Change login credential to connect to the API
-        ppi.account.login_api('<API Key>', '<API Secret>')
+        ppi.account.login_api('<key publica>', '<key privada>')
 
         # Getting accounts information
         print("Getting accounts information")
