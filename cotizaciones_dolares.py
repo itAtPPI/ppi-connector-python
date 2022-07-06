@@ -60,7 +60,8 @@ def calcular_y_mostrar():
 
 def main():
     try:
-        ppi.account.login('<user key>', '<user secret>')
+        # Change login credential to connect to the API
+        ppi.account.login_api('<key publica>', '<key privada>')
 
         def onconnect_marketdata():
             try:
