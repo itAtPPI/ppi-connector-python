@@ -2,6 +2,7 @@ from ppi_client.api.constants import ACCOUNTDATA_TYPE_ACCOUNT_NOTIFICATION, ACCO
     ACCOUNTDATA_TYPE_ORDER_NOTIFICATION
 from ppi_client.models.account_movements import AccountMovements
 from ppi_client.models.bank_account_request import BankAccountRequest
+from ppi_client.models.estimate_bonds import EstimateBonds
 from ppi_client.models.foreign_bank_account_request import ForeignBankAccountRequest, ForeignBankAccountRequestDTO
 from ppi_client.models.cancel_bank_account_request import CancelBankAccountRequest
 from ppi_client.models.order import Order
@@ -319,6 +320,12 @@ def main():
             CancelBankAccountRequest(account_number, cbu="0000000000000000000000", bank_account_number=""))
         print(cancel_bank_account_request)
         '''
+        
+        # Estimate bond
+        print("\nEstimate bond")
+        estimate = ppi.marketdata.estimate_bonds(EstimateBonds(ticker="CUAP", date=datetime.today(), quantityType="PAPELES", quantity=100,
+                                                               price=4555))
+        print(estimate)
 
         # Realtime subscription to market data
         def onconnect_marketdata():
