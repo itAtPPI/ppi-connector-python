@@ -138,24 +138,24 @@ def main():
 
         # Search Historic MarketData
         print("\nSearching MarketData")
-        market_data = ppi.marketdata.search("GGAL", "Acciones", "A-48HS", datetime(2021, 1, 1), datetime(2021, 12, 31))
+        market_data = ppi.marketdata.search("GGAL", "Acciones", "A-24HS", datetime(2021, 1, 1), datetime(2021, 12, 31))
         for ins in market_data:
             print("%s - %s - Volume %s - Opening %s - Min %s - Max %s" % (
                 ins['date'], ins['price'], ins['volume'], ins['openingPrice'], ins['min'], ins['max']))
 
         # Search Current MarketData
         print("\nSearching Current MarketData")
-        current_market_data = ppi.marketdata.current("GGAL", "Acciones", "A-48HS")
+        current_market_data = ppi.marketdata.current("GGAL", "Acciones", "A-24HS")
         print(current_market_data)
 
         # Search Current Book
         print("\nSearching Current Book")
-        current_book = ppi.marketdata.book("GGAL", "Acciones", "A-48HS")
+        current_book = ppi.marketdata.book("GGAL", "Acciones", "A-24HS")
         print(current_book)
 
         # Search Intraday MarketData
         print("\nSearching Intraday MarketData")
-        intraday_market_data = ppi.marketdata.intraday("GGAL", "Acciones", "A-48HS")
+        intraday_market_data = ppi.marketdata.intraday("GGAL", "Acciones", "A-24HS")
         for intra in intraday_market_data:
             print(intra)
 
@@ -331,8 +331,8 @@ def main():
         def onconnect_marketdata():
             try:
                 print("\nConnected to realtime market data")
-                ppi.realtime.subscribe_to_element(Instrument("GGAL", "ACCIONES", "A-48HS"))
-                ppi.realtime.subscribe_to_element(Instrument("AAPL", "CEDEARS", "A-48HS"))
+                ppi.realtime.subscribe_to_element(Instrument("GGAL", "ACCIONES", "A-24HS"))
+                ppi.realtime.subscribe_to_element(Instrument("AAPL", "CEDEARS", "A-24HS"))
                 ppi.realtime.subscribe_to_element(Instrument("AL30", "BONOS", "INMEDIATA"))
                 ppi.realtime.subscribe_to_element(Instrument("AL30D", "BONOS", "INMEDIATA"))
                 ppi.realtime.subscribe_to_element(Instrument("DLR/MAR22", "FUTUROS", "INMEDIATA"))
