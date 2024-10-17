@@ -22,7 +22,7 @@ if __name__ == '__main__':
     # Search Historic MarketData
     print(f"Bajando MarketData de {ticker}")
 
-    market_data = ppi.marketdata.search(ticker, tipo_instrumento, "A-48HS", datetime(2015, 1, 1),
+    market_data = ppi.marketdata.search(ticker, tipo_instrumento, "A-24HS", datetime(2015, 1, 1),
                                         datetime(2023, 12, 31))
     df_marketdata = get_dataframe_from_marketdata(market_data)
 
@@ -30,9 +30,7 @@ if __name__ == '__main__':
 
     for media in medias:
         df_marketdata[f"sma{media}"] = df_marketdata["price"].rolling(media).mean()
-
-    df_marketdata.dropna(inplace=True)
-
+        
     media1 = 20
     media2 = 200
 
