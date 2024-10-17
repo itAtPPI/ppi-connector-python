@@ -17,7 +17,7 @@ def simulacion_montecarlo(ppi, ticker, tipo_instrumento, dias_a_proyectar, canti
     # Search Historic MarketData
     print(f"Bajando MarketData de {ticker}")
 
-    market_data = ppi.marketdata.search(ticker, tipo_instrumento, "A-48HS", datetime(2015, 1, 1), datetime(2023, 12, 31))
+    market_data = ppi.marketdata.search(ticker, tipo_instrumento, "A-24HS", datetime(2015, 1, 1), datetime(2023, 12, 31))
     df_marketdata = get_dataframe_from_marketdata(market_data)
 
     df_marketdata_instrumento = df_marketdata[["date", "price"]]
