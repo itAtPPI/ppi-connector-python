@@ -31,7 +31,7 @@ def main():
 
         # Obtengo las cotizaciones historicas
         print("\nSearching MarketData")
-        market_data = ppi.marketdata.search("GGAL", "Acciones", "A-48HS", datetime(2021, 1, 1), datetime(2021, 12, 31))
+        market_data = ppi.marketdata.search("GGAL", "Acciones", "A-24HS", datetime(2021, 1, 1), datetime(2021, 12, 31))
 
         # Creo el excel
         workbook = Workbook()
