@@ -31,7 +31,7 @@ def main():
         def onconnect_marketdata():
             try:
                 print("\nConnected to realtime market data")
-                ppi.realtime.subscribe_to_element(Instrument("GGAL", "ACCIONES", "A-48HS"))
+                ppi.realtime.subscribe_to_element(Instrument("GGAL", "ACCIONES", "A-24HS"))
             except Exception as error:
                 traceback.print_exc()
 
