@@ -59,8 +59,8 @@ def main():
         for instruments in balances_positions["groupedInstruments"]:
             print("Instrument %s " % instruments['name'])
             for instrument in instruments['instruments']:
-                print("Ticker %s Price %s Amount %s" % (
-                    instrument['ticker'], instrument['price'], instrument['amount']))
+                print("Ticker %s Price %s Amount %s Quantity %s" % (
+                    instrument['ticker'], instrument['price'], instrument['amount'], instrument['quantity']))
 
         # Getting movements
         print("\nGetting movements of %s" % account_number)
